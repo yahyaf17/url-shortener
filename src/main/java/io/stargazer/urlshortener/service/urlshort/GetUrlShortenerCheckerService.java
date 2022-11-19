@@ -5,6 +5,7 @@ import io.stargazer.urlshortener.helper.BaseException;
 import io.stargazer.urlshortener.model.request.GetUrlShortenerCheckerRequest;
 import io.stargazer.urlshortener.model.response.GetUrlShorenerCheckerResponse;
 import io.stargazer.urlshortener.repository.UrlShortRepository;
+import io.stargazer.urlshortener.util.ConflictErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,9 @@ public class GetUrlShortenerCheckerService implements BaseService<GetUrlShortene
         Optional<String> shortUrlOpt =  urlShortRepository.findByShortUrl(input.getShortUrl());
         if (shortUrlOpt.isPresent()) {
             throw new BaseException(HttpStatus.CONFLICT,
-                    "4091",
-                    "Url Already Exist",
-                    "Url to-be Shortener Already Used"
+                    ConflictErrorCode.URL_ALREADY_EXIST.getCode(),
+                    ConflictErrorCode.URL_ALREADY_EXIST.getTitle(),
+                    ConflictErrorCode.URL_ALREADY_EXIST.getMessage()
             );
         }
 

@@ -9,6 +9,9 @@ import io.stargazer.urlshortener.model.request.PostCategoryRequest;
 import io.stargazer.urlshortener.model.response.PostCategoryResponse;
 import io.stargazer.urlshortener.repository.CategoryRepository;
 import io.stargazer.urlshortener.repository.UserRepository;
+import io.stargazer.urlshortener.util.BadRequestErrorCode;
+import io.stargazer.urlshortener.util.ConflictErrorCode;
+import io.stargazer.urlshortener.util.NotFoundErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +33,9 @@ public class PostCategoryService implements BaseService<PostCategoryRequest, Pos
         validateCategory(input);
         User user = userRepository.findById(input.getUserId())
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND,
-                        "4041",
-                        "User not found",
-                        "User not found")
+                        NotFoundErrorCode.USER_NOT_FOUND.getCode(),
+                        NotFoundErrorCode.USER_NOT_FOUND.getTitle(),
+                        NotFoundErrorCode.USER_NOT_FOUND.getMessage())
                 );
 
         Category category = Category.builder()
@@ -49,19 +52,14 @@ public class PostCategoryService implements BaseService<PostCategoryRequest, Pos
     }
 
     private void validateCategory(PostCategoryRequest input) {
-        if (input.getCategoryName().contains(" ")) {
-            throw new BaseException(HttpStatus.BAD_REQUEST,
-                    "4042",
-                    "Category Name Not Valid",
-                    "Category name should not contain whitespace, use dash (-) or underscore (_) instead");
-        }
+        CommonCategoryValidation.validateCategoryName(input.getCategoryName());
 
         Optional<Category> isCategoryExist = categoryRepository.findByName(input.getCategoryName());
         if (isCategoryExist.isPresent()) {
             throw new BaseException(HttpStatus.CONFLICT,
-                    "4092",
-                    "Category already exist",
-                    "Category Name already exist");
+                    ConflictErrorCode.CATEGORY_ALREADY_EXIST.getCode(),
+                    ConflictErrorCode.CATEGORY_ALREADY_EXIST.getTitle(),
+                    ConflictErrorCode.CATEGORY_ALREADY_EXIST.getMessage());
         }
     }
 }

@@ -8,7 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @MappedSuperclass
 @NoArgsConstructor
@@ -20,11 +20,11 @@ public class BaseEntity implements Serializable {
             updatable = false
     )
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
     @Column(
             name = "updated_at",
             nullable = false
     )
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    private Timestamp updatedAt;
 }
