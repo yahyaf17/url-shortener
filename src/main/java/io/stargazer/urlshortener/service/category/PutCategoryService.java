@@ -34,6 +34,8 @@ public class PutCategoryService implements BaseService<PutCategoryRequest, PutCa
                         NotFoundErrorCode.CATEGORY_NOT_FOUND.getTitle(),
                         NotFoundErrorCode.USER_NOT_FOUND.getMessage()));
 
+        CommonCategoryValidation.checkDeletedStatus(category.getDeleted());
+
         if (Objects.nonNull(input.getCategoryName())) {
             category.setName(input.getCategoryName());
         }

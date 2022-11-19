@@ -9,7 +9,6 @@ import io.stargazer.urlshortener.model.request.PostCategoryRequest;
 import io.stargazer.urlshortener.model.response.PostCategoryResponse;
 import io.stargazer.urlshortener.repository.CategoryRepository;
 import io.stargazer.urlshortener.repository.UserRepository;
-import io.stargazer.urlshortener.util.BadRequestErrorCode;
 import io.stargazer.urlshortener.util.ConflictErrorCode;
 import io.stargazer.urlshortener.util.NotFoundErrorCode;
 import org.springframework.http.HttpStatus;
@@ -42,6 +41,7 @@ public class PostCategoryService implements BaseService<PostCategoryRequest, Pos
                 .name(input.getCategoryName())
                 .description(input.getCategoryDescription())
                 .userId(user.getId())
+                .deleted(false)
                 .build();
         BaseEntityHelper.initBaseEntity(category);
         Category savedCategory = categoryRepository.save(category);

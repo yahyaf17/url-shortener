@@ -39,4 +39,7 @@ public class UrlShort extends BaseEntity {
     @Column(name = "category_id")
     private String categoryId;
 
+    @Column(name = "userId")
+    private String userId;
+
 }
