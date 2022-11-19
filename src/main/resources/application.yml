@@ -5,9 +5,8 @@ spring:
     show-sql: true
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/url_shortener
-    username: postgres
-    password: opelsogi17
+    url: jdbc:postgresql://localhost:5432/mock
+    username: mock
     hikari:
       connection-timeout: 30000
       validation-timeout: 5000
