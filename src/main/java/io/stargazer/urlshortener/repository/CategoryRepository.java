@@ -14,6 +14,8 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
     Optional<Category> findByName(String name);
 
+    Optional<Category> findCategoryByNameAndUserId(String id, String userId);
+
     @Query(value = "SELECT * FROM category " +
             "WHERE user_id = :userId " +
             "ORDER BY updated_at DESC", nativeQuery = true)

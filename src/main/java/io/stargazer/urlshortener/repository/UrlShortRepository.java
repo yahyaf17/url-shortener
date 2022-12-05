@@ -11,9 +11,9 @@ import java.util.Optional;
 @Repository
 public interface UrlShortRepository extends JpaRepository<UrlShort, String> {
 
-    @Query(value = "SELECT u.shortUrl FROM UrlShort u " +
-            "WHERE u.shortUrl = :shortUrl")
-    Optional<String> findByShortUrl(String shortUrl);
+    @Query(value = "SELECT u.urlShortId FROM UrlShort u " +
+            "WHERE u.urlShortId = :shortUrl")
+    Optional<String> findIdByShortUrl(String shortUrl);
 
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE UrlShort " +

@@ -22,7 +22,7 @@ public class GetUrlShortenerCheckerService implements BaseService<GetUrlShortene
 
     @Override
     public GetUrlShorenerCheckerResponse invoke(GetUrlShortenerCheckerRequest input) {
-        Optional<String> shortUrlOpt =  urlShortRepository.findByShortUrl(input.getShortUrl());
+        Optional<String> shortUrlOpt =  urlShortRepository.findIdByShortUrl(input.getShortUrl());
         if (shortUrlOpt.isPresent()) {
             throw new BaseException(HttpStatus.CONFLICT,
                     ConflictErrorCode.URL_ALREADY_EXIST.getCode(),

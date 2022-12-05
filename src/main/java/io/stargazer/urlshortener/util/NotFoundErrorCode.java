@@ -7,7 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum NotFoundErrorCode {
     USER_NOT_FOUND("4041", "User not found", "User not found"),
-    CATEGORY_NOT_FOUND("4042", "Category not found", "Cateogory not found");
+    CATEGORY_NOT_FOUND("4042", "Category not found", "Cateogory not found"),
+    URL_SHORT_NOT_FOUND("4043", "Url not found", "Url not found");
 
     private String code;
     private String title;
